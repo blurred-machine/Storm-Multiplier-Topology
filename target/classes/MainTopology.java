@@ -7,7 +7,7 @@ public class MainTopology {
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout("IntegerCounter", new IntegerSpout());
-        builder.setBolt("MultiplierBolt", new MultiplierBolt()).shuffleGrouping("IntegerCounter");
+        builder.setBolt("MultipyBolt", new MultiplyBolt()).shuffleGrouping("IntegerCounter");
 
         Config config = new Config();
         config.setDebug(true);
@@ -15,7 +15,7 @@ public class MainTopology {
         LocalCluster cluster = new LocalCluster();
         try{
             cluster.submitTopology("MainTopology", config, builder.createTopology());
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (TException e) {
             e.printStackTrace();
         } finally {
